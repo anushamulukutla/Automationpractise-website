@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auth and Sessions - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="auth">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Auth and Sessions</h1>
+    <p class="lead">Login and logout with different user states, JWT API login, session timeout, remember me, a protected page and a storage viewer.</p>
+
+    <div class="alert-box" role="alert" data-testid="redirect-notice" hidden></div>
+    <div class="alert-box" role="alert" data-testid="session-expired-message" hidden>Your session has expired. Please log in again.</div>
+
+    <section class="card" aria-labelledby="h-login" data-testid="section-login">
+      <h2 id="h-login">Login</h2>
+
+      <div data-testid="login-panel">
+        <form id="login-form" novalidate data-testid="login-form">
+          <div class="field">
+            <label for="login-username">Username</label>
+            <input type="text" id="login-username" autocomplete="username" data-testid="login-username-input">
+          </div>
+          <div class="field">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" autocomplete="current-password" data-testid="login-password-input">
+          </div>
+          <div class="field">
+            <label class="inline"><input type="checkbox" data-testid="login-remember-checkbox"> Remember me (stores a cookie and keeps the session after the browser closes)</label>
+          </div>
+          <div class="field">
+            <label for="session-timeout">Session length in seconds (the token expires after this)</label>
+            <input type="number" id="session-timeout" min="5" max="3600" value="60" style="max-width:120px" data-testid="session-timeout-input">
+          </div>
+          <div class="row">
+            <button type="submit" class="btn" data-testid="login-submit-btn">Log in</button>
+          </div>
+        </form>
+        <div class="alert-box" role="alert" style="margin-top:12px" data-testid="login-error" hidden></div>
+
+        <h3>Fill in a test user</h3>
+        <div class="row">
+          <button type="button" class="btn secondary" data-user="admin|Admin@123" data-testid="fill-admin-btn">Admin (valid)</button>
+          <button type="button" class="btn secondary" data-user="standard|User@123" data-testid="fill-standard-btn">Standard (valid)</button>
+          <button type="button" class="btn secondary" data-user="locked|Locked@123" data-testid="fill-locked-btn">Locked</button>
+          <button type="button" class="btn secondary" data-user="inactive|Inactive@123" data-testid="fill-inactive-btn">Inactive</button>
+          <button type="button" class="btn secondary" data-user="expired|Expired@123" data-testid="fill-expired-btn">Expired password</button>
+          <button type="button" class="btn secondary" data-user="admin|wrong-password" data-testid="fill-invalid-btn">Wrong password</button>
+        </div>
+      </div>
+
+      <div data-testid="session-panel" hidden>
+        <div class="alert-box ok" role="status" data-testid="login-success"></div>
+        <dl class="summary">
+          <dt>User</dt><dd data-testid="session-user"></dd>
+          <dt>Role</dt><dd data-testid="session-role"></dd>
+          <dt>Session</dt><dd data-testid="session-countdown"></dd>
+          <dt>Remembered</dt><dd data-testid="session-remembered"></dd>
+        </dl>
+        <div class="row">
+          <a class="btn" href="/protected.html" data-testid="protected-page-link">Open the protected page</a>
+          <button type="button" class="btn secondary" data-testid="logout-btn">Log out</button>
+        </div>
+      </div>
+
+      <p class="hint" style="margin-top:12px">Not logged in? <a href="/protected.html" data-testid="protected-page-anon-link">Try the protected page</a> and you will be sent back here.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-jwt" data-testid="section-jwt">
+      <h2 id="h-jwt">JWT API login</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="jwt-login-btn">POST /api/auth/login as admin</button>
+        <button type="button" class="btn secondary" data-testid="jwt-me-btn" disabled>GET /api/auth/me with the token</button>
+        <button type="button" class="btn secondary" data-testid="jwt-bad-btn">Call /api/auth/me with a bad token</button>
+      </div>
+      <p>Status: <span class="result" role="status" data-testid="jwt-status">No request yet</span></p>
+      <pre data-testid="jwt-token" tabindex="0" aria-label="JWT token">-</pre>
+      <pre data-testid="jwt-payload" tabindex="0" aria-label="Decoded JWT payload">-</pre>
+      <pre data-testid="jwt-me-result" tabindex="0" aria-label="Response of /api/auth/me">-</pre>
+    </section>
+
+    <section class="card" aria-labelledby="h-storage" data-testid="section-storage">
+      <h2 id="h-storage">Cookies, localStorage and sessionStorage</h2>
+      <div class="row" style="margin-bottom:10px">
+        <button type="button" class="btn secondary" data-testid="refresh-storage-btn">Refresh</button>
+        <button type="button" class="btn" data-testid="add-cookie-btn">Add test cookie</button>
+        <button type="button" class="btn" data-testid="add-local-btn">Add localStorage item</button>
+        <button type="button" class="btn" data-testid="add-session-btn">Add sessionStorage item</button>
+        <button type="button" class="btn danger" data-testid="clear-storage-btn">Clear all</button>
+      </div>
+      <h3>Cookies</h3>
+      <table aria-label="Cookies" data-testid="cookies-table"><thead><tr><th scope="col">Name</th><th scope="col">Value</th></tr></thead><tbody data-testid="cookies-body"></tbody></table>
+      <h3>localStorage</h3>
+      <table aria-label="localStorage" data-testid="local-storage-table"><thead><tr><th scope="col">Key</th><th scope="col">Value</th></tr></thead><tbody data-testid="local-storage-body"></tbody></table>
+      <h3>sessionStorage</h3>
+      <table aria-label="sessionStorage" data-testid="session-storage-table"><thead><tr><th scope="col">Key</th><th scope="col">Value</th></tr></thead><tbody data-testid="session-storage-body"></tbody></table>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script src="/js/session.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

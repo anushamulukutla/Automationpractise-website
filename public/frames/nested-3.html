@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nested frame level 3</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="frame-body">
+  <h2 data-testid="nested-l3-title">Level 3 frame</h2>
+  <div class="row">
+    <button type="button" class="btn" data-testid="nested-l3-btn">Click level 3</button>
+    <span class="result" role="status" data-testid="nested-l3-result"></span>
+  </div>
+  <script>
+    document.querySelector('[data-testid="nested-l3-btn"]').addEventListener('click', function () {
+      document.querySelector('[data-testid="nested-l3-result"]').textContent = 'Level 3 button clicked';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mouse and Keyboard - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="mouse">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Mouse and Keyboard Actions</h1>
+    <p class="lead">Hover, right-click, double-click, drag and drop, a sortable list, keyboard shortcuts and scrolling.</p>
+
+    <section class="card" aria-labelledby="h-hover" data-testid="section-hover">
+      <h2 id="h-hover">Hover menu and tooltip</h2>
+      <div class="row">
+        <div class="hover-menu-wrap" data-testid="hover-menu-wrap">
+          <button type="button" class="btn" aria-haspopup="true" data-testid="hover-menu-trigger">Hover over me</button>
+          <ul class="hover-menu" role="menu" data-testid="hover-menu" hidden>
+            <li role="none"><button type="button" role="menuitem" class="menu-item" data-testid="hover-item-profile">Profile</button></li>
+            <li role="none"><button type="button" role="menuitem" class="menu-item" data-testid="hover-item-settings">Settings</button></li>
+            <li role="none"><button type="button" role="menuitem" class="menu-item" data-testid="hover-item-logout">Log out</button></li>
+          </ul>
+        </div>
+        <span class="tooltip-wrap">
+          <button type="button" class="btn secondary" aria-describedby="tooltip-text" data-testid="tooltip-trigger">Tooltip target</button>
+          <span class="tooltip" id="tooltip-text" role="tooltip" data-testid="tooltip" hidden>This is a tooltip</span>
+        </span>
+        <span class="result" role="status" data-testid="hover-result">No menu item chosen</span>
+      </div>
+      <p class="hint">The menu opens on hover or keyboard focus; the tooltip on hover or focus.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-clicks" data-testid="section-clicks">
+      <h2 id="h-clicks">Right-click and double-click</h2>
+      <div class="grid-2">
+        <div>
+          <div class="ctx-area" tabindex="0" data-testid="context-area">Right-click anywhere in this box</div>
+          <p class="result" role="status" data-testid="context-result">No context action yet</p>
+        </div>
+        <div>
+          <button type="button" class="btn" data-testid="double-click-btn">Double-click me</button>
+          <p>Single clicks: <strong data-testid="click-count">0</strong></p>
+          <p class="result" role="status" data-testid="double-click-result">Not double-clicked yet</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-drag" data-testid="section-drag-drop">
+      <h2 id="h-drag">Drag and drop</h2>
+      <div class="drag-area" data-testid="drag-area">
+        <div class="drag-source" data-testid="drag-source" role="button" tabindex="0" aria-label="Draggable box">Drag me</div>
+        <div class="drop-target" data-testid="drop-target" aria-label="Drop target">Drop here</div>
+      </div>
+      <p class="result" role="status" data-testid="drag-result">Not dropped yet</p>
+      <button type="button" class="btn secondary" data-testid="drag-reset-btn">Reset</button>
+    </section>
+
+    <section class="card" aria-labelledby="h-sort" data-testid="section-sortable">
+      <h2 id="h-sort">Sortable list</h2>
+      <ul class="sortable" data-testid="sortable-list" aria-label="Sortable list">
+        <li tabindex="0" data-id="one" data-testid="sortable-item-one">Item 1</li>
+        <li tabindex="0" data-id="two" data-testid="sortable-item-two">Item 2</li>
+        <li tabindex="0" data-id="three" data-testid="sortable-item-three">Item 3</li>
+        <li tabindex="0" data-id="four" data-testid="sortable-item-four">Item 4</li>
+      </ul>
+      <p class="hint">Drag an item to reorder, or focus it and press Alt+ArrowUp / Alt+ArrowDown.</p>
+      <p>Order: <strong data-testid="sortable-order">one, two, three, four</strong></p>
+    </section>
+
+    <section class="card" aria-labelledby="h-keys" data-testid="section-keyboard">
+      <h2 id="h-keys">Keyboard shortcuts and key presses</h2>
+      <div class="field">
+        <label for="key-input">Type or press keys here</label>
+        <input type="text" id="key-input" autocomplete="off" data-testid="key-input">
+      </div>
+      <dl class="summary">
+        <dt>Last key</dt><dd data-testid="key-display">none</dd>
+        <dt>Code</dt><dd data-testid="key-code">none</dd>
+        <dt>Modifiers</dt><dd data-testid="key-modifiers">none</dd>
+      </dl>
+      <p>Shortcuts (while the input above is focused): <kbd>Ctrl+S</kbd> save, <kbd>Ctrl+Shift+K</kbd> clear, <kbd>Alt+H</kbd> help, <kbd>Escape</kbd> reset.</p>
+      <p class="result" role="status" data-testid="shortcut-result">No shortcut used yet</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-scroll" data-testid="section-scroll">
+      <h2 id="h-scroll">Scroll into view</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="scroll-to-target-btn">Scroll to the target below</button>
+        <span class="result" role="status" data-testid="scroll-status">Target is not visible</span>
+      </div>
+      <div style="height:900px" aria-hidden="true"></div>
+      <div class="lazy-box" tabindex="-1" data-testid="scroll-target">
+        <strong>Scroll target</strong>
+        <button type="button" class="btn" data-testid="scroll-target-btn">Button at the bottom</button>
+        <span class="result" role="status" data-testid="scroll-target-result"></span>
+      </div>
+    </section>
+  </main>
+</div>
+
+<ul class="context-menu" role="menu" data-testid="context-menu" hidden>
+  <li role="none"><button type="button" role="menuitem" class="menu-item" data-action="Copy" data-testid="context-copy">Copy</button></li>
+  <li role="none"><button type="button" role="menuitem" class="menu-item" data-action="Paste" data-testid="context-paste">Paste</button></li>
+  <li role="none"><button type="button" role="menuitem" class="menu-item" data-action="Delete" data-testid="context-delete">Delete</button></li>
+</ul>
+
+<script src="/js/layout.js"></script>
+<script src="/js/mouse.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dynamic Elements - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="dynamic">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Dynamic Elements</h1>
+    <p class="lead">Elements that change, appear, disappear, load late or get re-rendered. Use auto-waiting and web-first assertions instead of fixed sleeps.</p>
+
+    <section class="card" aria-labelledby="h-random" data-testid="section-random-ids">
+      <h2 id="h-random">Random IDs and classes <span class="badge tricky">tricky</span></h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="random-id-btn" id="rnd-placeholder">Button with a random id</button>
+        <span>id: <code data-testid="random-id-value">-</code> &nbsp; class: <code data-testid="random-class-value">-</code></span>
+      </div>
+      <p class="hint">This button gets a new <code>id</code> and class on every page load, whatever the Settings toggle says.</p>
+      <p class="result" role="status" data-testid="random-id-result"></p>
+    </section>
+
+    <section class="card" aria-labelledby="h-appear" data-testid="section-appear-disappear">
+      <h2 id="h-appear">Appears and disappears</h2>
+      <div class="demo">
+        <div class="row">
+          <label for="appear-delay">Appear after (seconds)</label>
+          <input type="number" id="appear-delay" min="1" max="10" value="3" style="width:90px" data-testid="appear-delay-input">
+          <button type="button" class="btn" data-testid="start-appear-btn">Start</button>
+        </div>
+        <p data-testid="appear-status" class="result" role="status">Not started</p>
+        <div data-testid="appear-host"></div>
+      </div>
+      <div class="demo">
+        <div class="row">
+          <button type="button" class="btn" data-testid="start-disappear-btn">Show, then remove after 3 s</button>
+        </div>
+        <p data-testid="disappear-status" class="result" role="status">Not started</p>
+        <div data-testid="disappear-host"></div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-enable" data-testid="section-delayed-enable">
+      <h2 id="h-enable">Button enabled after a delay</h2>
+      <div class="row">
+        <button type="button" class="btn" disabled data-testid="delayed-enable-btn">Submit (enabled after 4 s)</button>
+        <button type="button" class="btn secondary" data-testid="restart-enable-btn">Restart timer</button>
+        <span class="result" role="status" data-testid="delayed-enable-status">Waiting...</span>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-ajax" data-testid="section-ajax-table">
+      <h2 id="h-ajax">Spinner, skeleton and AJAX table</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="load-table-btn">Load table (2 s)</button>
+        <button type="button" class="btn secondary" data-testid="clear-table-btn">Clear</button>
+      </div>
+      <div data-testid="ajax-table-host" aria-live="polite" style="margin-top:10px"></div>
+    </section>
+
+    <section class="card" aria-labelledby="h-infinite" data-testid="section-infinite-scroll">
+      <h2 id="h-infinite">Infinite scroll</h2>
+      <div class="scroll-box" tabindex="0" role="region" aria-label="Infinite scroll list" data-testid="infinite-scroll-container"></div>
+      <p class="hint" role="status" data-testid="infinite-status">Loading...</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-stale" data-testid="section-stale">
+      <h2 id="h-stale">Stale element (DOM re-render) <span class="badge tricky">tricky</span></h2>
+      <p class="hint">Clicking any item re-creates the whole list. A locator you saved earlier points at a detached node; re-query it.</p>
+      <ul class="plain-list" data-testid="stale-list"></ul>
+      <p>Renders so far: <strong data-testid="stale-render-count">0</strong> &nbsp; <span class="result" role="status" data-testid="stale-click-result">No item clicked</span></p>
+    </section>
+
+    <section class="card" aria-labelledby="h-lazy" data-testid="section-lazy">
+      <h2 id="h-lazy">Lazy-loaded section</h2>
+      <p class="hint">Scroll down. The section below loads when it enters the viewport.</p>
+      <div style="height:600px" aria-hidden="true"></div>
+      <div class="lazy-box" data-testid="lazy-section">
+        <p data-testid="lazy-placeholder">Not loaded yet. Scroll here to load it.</p>
+        <div data-testid="lazy-content" hidden>
+          <h3>Lazy content loaded</h3>
+          <p data-testid="lazy-text">This block was fetched only after it scrolled into view.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-add" data-testid="section-add-remove">
+      <h2 id="h-add">Add and remove elements</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="add-element-btn">Add element</button>
+        <span>Count: <strong data-testid="added-count">0</strong></span>
+      </div>
+      <div data-testid="added-elements" style="margin-top:8px"></div>
+    </section>
+
+    <section class="card" aria-labelledby="h-rows" data-testid="section-dynamic-table">
+      <h2 id="h-rows">Dynamic table rows</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="add-row-btn">Add row</button>
+        <span>Rows: <strong data-testid="dynamic-row-count">0</strong></span>
+      </div>
+      <table style="margin-top:10px" aria-label="Dynamic rows">
+        <thead><tr><th scope="col">#</th><th scope="col">Name</th><th scope="col">Action</th></tr></thead>
+        <tbody data-testid="dynamic-table-body"></tbody>
+      </table>
+      <p class="hint" data-testid="dynamic-table-empty">No rows yet.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-progress" data-testid="section-progress">
+      <h2 id="h-progress">Progress bar</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="start-progress-btn">Start (about 5 s)</button>
+        <span class="result" role="status" data-testid="progress-status">Idle</span>
+      </div>
+      <div class="progress" role="progressbar" aria-label="Task progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-testid="progress-bar">
+        <div class="progress-fill" data-testid="progress-fill"></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script src="/js/dynamic.js"></script>
+</body>
+</html>

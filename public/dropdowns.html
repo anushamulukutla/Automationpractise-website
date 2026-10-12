@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dropdowns and Selects - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="dropdowns">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Dropdowns and Selects</h1>
+    <p class="lead">Native selects, custom div-based dropdowns, dependent dropdowns loaded from the API, autocomplete and delayed options.</p>
+
+    <section class="card" aria-labelledby="h-native" data-testid="section-native-selects">
+      <h2 id="h-native">Native selects</h2>
+      <div class="grid-2">
+        <div class="field">
+          <label for="native-select">Single select</label>
+          <select id="native-select" data-testid="native-single-select">
+            <option value="">Choose a fruit</option>
+            <option value="apple">Apple</option>
+            <option value="banana">Banana</option>
+            <option value="cherry">Cherry</option>
+            <option value="mango">Mango</option>
+          </select>
+          <p class="result" role="status" data-testid="native-select-result">Nothing selected</p>
+        </div>
+        <div class="field">
+          <label for="multi-select">Multi select</label>
+          <select id="multi-select" multiple data-testid="native-multi-select" aria-describedby="multi-hint">
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="yellow">Yellow</option>
+            <option value="purple">Purple</option>
+          </select>
+          <p class="hint" id="multi-hint">Hold Ctrl or Cmd to select several.</p>
+          <p class="result" role="status" data-testid="multi-select-result">Nothing selected</p>
+        </div>
+      </div>
+      <div class="field">
+        <label for="grouped-select">Grouped options (optgroup)</label>
+        <select id="grouped-select" data-testid="grouped-select">
+          <option value="">Choose a tool</option>
+          <optgroup label="UI automation">
+            <option value="playwright">Playwright</option>
+            <option value="selenium">Selenium</option>
+            <option value="cypress">Cypress</option>
+          </optgroup>
+          <optgroup label="API testing">
+            <option value="postman">Postman</option>
+            <option value="rest-assured">REST Assured</option>
+          </optgroup>
+          <optgroup label="Performance">
+            <option value="jmeter">JMeter</option>
+            <option value="k6">k6</option>
+          </optgroup>
+        </select>
+        <p class="result" role="status" data-testid="grouped-select-result">Nothing selected</p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-custom" data-testid="section-custom-dropdown">
+      <h2 id="h-custom">Custom dropdown (div-based, not a &lt;select&gt;)</h2>
+      <span id="custom-dropdown-label" class="hint" style="display:block">Favourite colour</span>
+      <div class="dd" data-testid="custom-dropdown">
+        <button type="button" class="dd-trigger" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="custom-dropdown-menu" aria-labelledby="custom-dropdown-label" data-testid="custom-dropdown-trigger">Select a colour</button>
+        <div class="dd-menu" id="custom-dropdown-menu" data-testid="custom-dropdown-menu" hidden>
+          <ul class="dd-list" role="listbox" aria-labelledby="custom-dropdown-label" data-testid="custom-dropdown-list"></ul>
+        </div>
+      </div>
+      <p>Selected: <strong class="result" role="status" data-testid="custom-dropdown-selected">none</strong></p>
+    </section>
+
+    <section class="card" aria-labelledby="h-search" data-testid="section-searchable-dropdown">
+      <h2 id="h-search">Searchable dropdown</h2>
+      <span id="searchable-dropdown-label" class="hint" style="display:block">Programming language</span>
+      <div class="dd" data-testid="searchable-dropdown">
+        <button type="button" class="dd-trigger" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="searchable-dropdown-menu" aria-labelledby="searchable-dropdown-label" data-testid="searchable-dropdown-trigger">Select a language</button>
+        <div class="dd-menu" id="searchable-dropdown-menu" data-testid="searchable-dropdown-menu" hidden>
+          <input type="text" class="dd-search" aria-label="Search languages" autocomplete="off" placeholder="Type to filter..." data-testid="searchable-dropdown-search">
+          <ul class="dd-list" role="listbox" aria-labelledby="searchable-dropdown-label" data-testid="searchable-dropdown-list"></ul>
+          <p class="dd-empty" data-testid="searchable-dropdown-empty" hidden>No matches</p>
+        </div>
+      </div>
+      <p>Selected: <strong class="result" role="status" data-testid="searchable-dropdown-selected">none</strong></p>
+    </section>
+
+    <section class="card" aria-labelledby="h-dependent" data-testid="section-dependent-dropdowns">
+      <h2 id="h-dependent">Dependent dropdowns (loaded via API)</h2>
+      <div class="grid-2">
+        <div class="field">
+          <label for="country-select">Country</label>
+          <select id="country-select" disabled data-testid="country-select"><option value="">Loading countries...</option></select>
+        </div>
+        <div class="field">
+          <label for="state-select">State / Province</label>
+          <select id="state-select" disabled data-testid="state-select"><option value="">Select a country first</option></select>
+        </div>
+        <div class="field">
+          <label for="city-select">City</label>
+          <select id="city-select" disabled data-testid="city-select"><option value="">Select a state first</option></select>
+        </div>
+      </div>
+      <p class="result" role="status" data-testid="dependent-result">No location selected</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-auto" data-testid="section-autocomplete">
+      <h2 id="h-auto">Autocomplete / typeahead</h2>
+      <label for="autocomplete-input">Country</label>
+      <div class="ac">
+        <input type="text" id="autocomplete-input" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="autocomplete-list" autocomplete="off" placeholder="Start typing, e.g. ind" data-testid="autocomplete-input">
+        <ul class="ac-list" id="autocomplete-list" role="listbox" aria-label="Suggestions" data-testid="autocomplete-list" hidden></ul>
+      </div>
+      <p class="hint" role="status" data-testid="autocomplete-loading" hidden>Searching...</p>
+      <p>Chosen: <strong class="result" role="status" data-testid="autocomplete-result">nothing</strong></p>
+    </section>
+
+    <section class="card" aria-labelledby="h-delayed" data-testid="section-delayed-options">
+      <h2 id="h-delayed">Dropdown with delayed options <span class="badge tricky">tricky</span></h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="load-delayed-options-btn">Load options (3s delay)</button>
+        <span class="result" role="status" data-testid="delayed-select-status">Options not loaded</span>
+      </div>
+      <div class="field" style="margin-top:10px">
+        <label for="delayed-select">Delayed select</label>
+        <select id="delayed-select" disabled data-testid="delayed-select"><option value="">No options yet</option></select>
+      </div>
+      <p class="result" role="status" data-testid="delayed-select-result">Nothing selected</p>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script src="/js/dropdowns.js"></script>
+</body>
+</html>

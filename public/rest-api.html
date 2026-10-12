@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REST API - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="rest-api">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">REST API</h1>
+    <p class="lead">CRUD endpoints for users, products and orders, JWT auth, pagination, filtering, sorting, delays and random failures. Use Postman, pytest, or the console below.</p>
+
+    <section class="card" aria-labelledby="h-links" data-testid="section-links">
+      <h2 id="h-links">Documentation</h2>
+      <ul>
+        <li><a href="/docs" data-testid="swagger-docs-link">Swagger UI (/docs)</a>: try every endpoint in the browser</li>
+        <li><a href="/openapi.json" data-testid="openapi-json-link">OpenAPI JSON (/openapi.json)</a>: import into Postman</li>
+        <li><a href="/health" data-testid="health-link">/health</a></li>
+      </ul>
+    </section>
+
+    <section class="card" aria-labelledby="h-eps" data-testid="section-endpoints">
+      <h2 id="h-eps">Endpoints</h2>
+      <table aria-label="API endpoints" data-testid="endpoints-table">
+        <thead><tr><th scope="col">Resource</th><th scope="col">Methods</th><th scope="col">Auth</th></tr></thead>
+        <tbody>
+          <tr><td><code>/api/auth/login</code></td><td>POST</td><td>none (returns a JWT)</td></tr>
+          <tr><td><code>/api/users</code>, <code>/api/users/:id</code></td><td>GET, POST, PUT, PATCH, DELETE</td><td>token; DELETE needs admin</td></tr>
+          <tr><td><code>/api/products</code>, <code>/api/products/:id</code></td><td>GET, POST, PUT, PATCH, DELETE</td><td>GET public, writes need a token</td></tr>
+          <tr><td><code>/api/orders</code>, <code>/api/orders/:id</code></td><td>GET, POST, PUT, PATCH, DELETE</td><td>token</td></tr>
+          <tr><td><code>/slow?ms=3000</code></td><td>GET</td><td>none</td></tr>
+          <tr><td><code>/flaky?rate=0.5</code></td><td>GET</td><td>none</td></tr>
+          <tr><td><code>/status/:code</code></td><td>GET</td><td>none</td></tr>
+          <tr><td><code>/api/reset</code></td><td>POST</td><td>none</td></tr>
+        </tbody>
+      </table>
+      <p class="hint">List endpoints take <code>page</code>, <code>limit</code>, <code>sort</code>, <code>order</code>, <code>q</code> and field filters such as <code>role</code>, <code>status</code>, <code>category</code>.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-console" data-testid="section-console">
+      <h2 id="h-console">Request console</h2>
+      <div class="row" style="margin-bottom:10px">
+        <button type="button" class="btn secondary" data-testid="get-token-btn">Get an admin token</button>
+        <span class="result" role="status" data-testid="token-status">No token yet</span>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="req-method">Method</label>
+          <select id="req-method" data-testid="request-method-select">
+            <option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="req-path">Path</label>
+          <input type="text" id="req-path" value="/api/users?limit=3" data-testid="request-path-input">
+        </div>
+      </div>
+      <div class="field">
+        <label for="req-token">Bearer token (optional)</label>
+        <input type="text" id="req-token" autocomplete="off" data-testid="request-token-input" style="max-width:none">
+      </div>
+      <div class="field">
+        <label for="req-body">JSON body</label>
+        <textarea id="req-body" rows="4" style="max-width:none" spellcheck="false" data-testid="request-body-textarea">{"username":"new.user","email":"new.user@example.com"}</textarea>
+      </div>
+      <div class="row">
+        <button type="button" class="btn" data-testid="send-request-btn">Send request</button>
+        <span>Status: <strong data-testid="response-status">-</strong></span>
+        <span>Time: <strong data-testid="response-time">-</strong></span>
+      </div>
+      <pre data-testid="response-body" tabindex="0" aria-label="Response body">Send a request to see the response.</pre>
+    </section>
+
+    <section class="card" aria-labelledby="h-res" data-testid="section-resilience">
+      <h2 id="h-res">Delays and random failures</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="slow-request-btn">GET /slow?ms=3000</button>
+        <button type="button" class="btn" data-testid="flaky-request-btn">GET /flaky (50% failure)</button>
+        <span class="result" role="status" data-testid="resilience-status">No request yet</span>
+      </div>
+      <p>Attempts: <strong data-testid="flaky-attempts">0</strong> &nbsp; Successes: <strong data-testid="flaky-successes">0</strong> &nbsp; Failures: <strong data-testid="flaky-failures">0</strong></p>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script src="/js/rest-api.js"></script>
+</body>
+</html>

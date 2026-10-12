@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File Upload and Download - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="files">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">File Upload and Download</h1>
+    <p class="lead">Single, multiple, drag-and-drop and progress uploads, with validation, plus downloads and an uploaded files list.</p>
+
+    <section class="card" aria-labelledby="h-rules" data-testid="section-rules">
+      <h2 id="h-rules">Validation rules</h2>
+      <ul data-testid="validation-rules">
+        <li>Maximum size: <strong>2 MB</strong></li>
+        <li>Allowed types: <strong>pdf, png, csv</strong></li>
+        <li>Empty files are rejected, and the content must match the extension</li>
+      </ul>
+      <p class="hint">Need test files? Download the <a href="/api/testdata/sample-files.zip" data-testid="rules-sample-files-link">sample files pack</a>.</p>
+      <div class="result err" role="alert" data-testid="upload-errors" hidden></div>
+    </section>
+
+    <section class="card" aria-labelledby="h-single" data-testid="section-single-upload">
+      <h2 id="h-single">Single file upload</h2>
+      <div class="field">
+        <label for="single-file">Choose a file</label>
+        <input type="file" id="single-file" accept=".pdf,.png,.csv" data-testid="single-file-input">
+      </div>
+      <div class="row">
+        <button type="button" class="btn" data-testid="single-upload-btn">Upload</button>
+        <span class="result" role="status" data-testid="single-upload-status"></span>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-multi" data-testid="section-multi-upload">
+      <h2 id="h-multi">Multiple file upload</h2>
+      <div class="field">
+        <label for="multi-file">Choose several files</label>
+        <input type="file" id="multi-file" multiple data-testid="multi-file-input">
+      </div>
+      <div class="row">
+        <button type="button" class="btn" data-testid="multi-upload-btn">Upload all</button>
+        <span class="result" role="status" data-testid="multi-upload-status"></span>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-drop" data-testid="section-drop-zone">
+      <h2 id="h-drop">Drag and drop</h2>
+      <div class="drop-zone" tabindex="0" role="button" aria-label="Drop files here or press Enter to browse" data-testid="drop-zone">
+        <p>Drop files here, or click to browse</p>
+        <input type="file" multiple class="visually-hidden" aria-label="Browse files for the drop zone" data-testid="drop-zone-input">
+      </div>
+      <p class="result" role="status" data-testid="drop-zone-status">Nothing dropped yet</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-prog" data-testid="section-progress-upload">
+      <h2 id="h-prog">Upload with progress bar <span class="badge tricky">tricky</span></h2>
+      <div class="field">
+        <label for="progress-file">Choose a file</label>
+        <input type="file" id="progress-file" accept=".pdf,.png,.csv" data-testid="progress-file-input">
+      </div>
+      <div class="row">
+        <button type="button" class="btn" data-testid="progress-upload-btn">Upload (server takes 2 s)</button>
+        <span class="result" role="status" data-testid="progress-status">Idle</span>
+      </div>
+      <div class="progress" role="progressbar" aria-label="Upload progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-testid="upload-progress">
+        <div class="progress-fill" data-testid="upload-progress-fill"></div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-list" data-testid="section-uploaded-files">
+      <h2 id="h-list">Uploaded files</h2>
+      <table aria-label="Uploaded files" data-testid="uploaded-files-table">
+        <thead><tr><th scope="col">Name</th><th scope="col">Type</th><th scope="col">Size</th><th scope="col">Action</th></tr></thead>
+        <tbody data-testid="uploaded-files-body"></tbody>
+      </table>
+      <p class="hint" data-testid="no-files-message">No files uploaded yet.</p>
+      <p class="hint">Total: <strong data-testid="uploaded-count">0</strong></p>
+    </section>
+
+    <section class="card" aria-labelledby="h-down" data-testid="section-downloads">
+      <h2 id="h-down">Downloads</h2>
+      <div class="row">
+        <a class="btn secondary" href="/api/download/pdf" download data-testid="download-pdf-link">Download PDF</a>
+        <a class="btn secondary" href="/api/download/csv" download data-testid="download-csv-link">Download CSV</a>
+        <a class="btn secondary" href="/api/download/image" download data-testid="download-image-link">Download image</a>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <button type="button" class="btn" data-testid="delayed-download-btn">Delayed download (3 s)</button>
+        <span class="result" role="status" data-testid="download-status">No download started</span>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script src="/js/files.js"></script>
+</body>
+</html>

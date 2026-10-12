@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simple frame</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="frame-body">
+  <h2 data-testid="simple-frame-title">Frame with a dynamic id</h2>
+  <div class="row">
+    <button type="button" class="btn" data-testid="simple-frame-btn">Click me</button>
+    <span class="result" role="status" data-testid="simple-frame-result"></span>
+  </div>
+  <script>
+    document.querySelector('[data-testid="simple-frame-btn"]').addEventListener('click', function () {
+      document.querySelector('[data-testid="simple-frame-result"]').textContent = 'Clicked inside dynamic-id frame';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Form frame</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="frame-body">
+  <h2 data-testid="frame-form-title">Form inside an iframe</h2>
+  <form data-testid="frame-form" novalidate>
+    <div class="field">
+      <label for="frame-name">Name</label>
+      <input type="text" id="frame-name" name="name" autocomplete="off" data-testid="frame-name-input">
+    </div>
+    <div class="field">
+      <label for="frame-email">Email</label>
+      <input type="email" id="frame-email" name="email" autocomplete="off" data-testid="frame-email-input">
+    </div>
+    <div class="row">
+      <button type="submit" class="btn" data-testid="frame-submit-btn">Submit</button>
+      <span class="result" role="status" data-testid="frame-form-result"></span>
+    </div>
+  </form>
+  <script>
+    document.querySelector('[data-testid="frame-form"]').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.querySelector('[data-testid="frame-name-input"]').value.trim();
+      var email = document.querySelector('[data-testid="frame-email-input"]').value.trim();
+      var out = document.querySelector('[data-testid="frame-form-result"]');
+      if (!name || !email) {
+        out.textContent = 'Name and email are required';
+        out.className = 'result err';
+        return;
+      }
+      out.textContent = 'Submitted: ' + name + ' <' + email + '>';
+      out.className = 'result ok';
+    });
+  </script>
+</body>
+</html>

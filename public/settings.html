@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="settings">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Settings</h1>
+    <p class="lead">Global QA toggles. They apply to every page and to the API until you reset.</p>
+
+    <section class="card" aria-labelledby="h-toggles" data-testid="section-toggles">
+      <h2 id="h-toggles">QA toggles</h2>
+
+      <div class="field">
+        <label><input type="checkbox" role="switch" data-testid="slow-network-toggle"> Slow network</label>
+        <p class="hint">Adds latency to every API call.</p>
+        <label for="slow-network-ms">Latency (ms, 0 to 10000)</label>
+        <input type="number" id="slow-network-ms" min="0" max="10000" step="100" value="1500" data-testid="slow-network-ms-input">
+      </div>
+
+      <div class="field">
+        <label><input type="checkbox" role="switch" data-testid="flaky-mode-toggle"> Flaky mode</label>
+        <p class="hint">API calls randomly fail with HTTP 503 (reset and settings calls are never affected).</p>
+        <label for="flaky-rate">Failure rate (%)</label>
+        <input type="number" id="flaky-rate" min="0" max="100" step="5" value="30" data-testid="flaky-rate-input">
+      </div>
+
+      <div class="field">
+        <label><input type="checkbox" role="switch" data-testid="randomize-ids-toggle"> Randomize IDs</label>
+        <p class="hint">Gives every element id and a random class a new value on each page load. <code>data-testid</code> never changes.</p>
+      </div>
+
+      <div class="row">
+        <button type="button" class="btn" data-testid="settings-save-btn">Save settings</button>
+        <span class="result" role="status" data-testid="settings-status"></span>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-reset" data-testid="section-reset">
+      <h2 id="h-reset">Reset</h2>
+      <p>Restore the default dataset (same as <code>POST /api/reset</code>).</p>
+      <div class="field">
+        <label><input type="checkbox" data-testid="reset-keep-settings"> Keep the toggles above</label>
+      </div>
+      <div class="row">
+        <button type="button" class="btn danger" data-testid="reset-data-btn">Reset all data</button>
+        <span class="result" role="status" data-testid="reset-status"></span>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>

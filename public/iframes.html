@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iframes - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="iframes">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Iframes</h1>
+    <p class="lead">Practice switching into frames: a form, nested frames, dynamic content, a dynamic ID/name and a sandboxed frame.</p>
+
+    <section class="card" aria-labelledby="h-single" data-testid="section-single-iframe">
+      <h2 id="h-single">Single iframe with a form</h2>
+      <iframe class="h-md" src="/frames/form-frame.html" title="Form inside an iframe" data-testid="single-iframe"></iframe>
+    </section>
+
+    <section class="card" aria-labelledby="h-nested" data-testid="section-nested-iframes">
+      <h2 id="h-nested">Nested iframes (3 levels)</h2>
+      <iframe class="h-lg" src="/frames/nested-1.html" title="Nested iframe level 1" data-testid="nested-iframe-l1"></iframe>
+      <p class="hint">Level 1 contains level 2, which contains level 3. Each level has its own button and result.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-dynamic" data-testid="section-dynamic-iframe">
+      <h2 id="h-dynamic">Iframe with dynamic content <span class="badge tricky">tricky</span></h2>
+      <iframe class="h-sm" src="/frames/dynamic-frame.html" title="Iframe with dynamic content" data-testid="dynamic-iframe"></iframe>
+      <div class="row" style="margin-top:10px">
+        <button type="button" class="btn" data-testid="set-frame-content-a-btn">Send content A</button>
+        <button type="button" class="btn" data-testid="set-frame-content-b-btn">Send content B</button>
+        <button type="button" class="btn secondary" data-testid="clear-frame-content-btn">Clear content</button>
+        <button type="button" class="btn secondary" data-testid="reload-dynamic-frame-btn">Reload frame</button>
+      </div>
+      <p class="hint">The frame shows "Loading..." for 2 seconds on every (re)load. These parent buttons update what is shown inside the frame.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-dyn-id" data-testid="section-dynamic-id-iframe">
+      <h2 id="h-dyn-id">Iframe with dynamic ID and name <span class="badge tricky">tricky</span></h2>
+      <div data-testid="dynamic-id-frame-host"></div>
+      <p>Current id: <code data-testid="dynamic-frame-id">-</code> &nbsp; Current name: <code data-testid="dynamic-frame-name">-</code></p>
+      <button type="button" class="btn secondary" data-testid="regenerate-frame-id-btn">Regenerate id and name</button>
+      <p class="hint">The id and name change on every load, so locate this frame by <code>data-testid</code> or title, not by id.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-sandbox" data-testid="section-sandboxed-iframe">
+      <h2 id="h-sandbox">Sandboxed iframe</h2>
+      <iframe class="h-sm" sandbox="allow-scripts" src="/frames/sandboxed-frame.html" title="Sandboxed iframe" data-testid="sandboxed-iframe"></iframe>
+      <p class="hint">Uses <code>sandbox="allow-scripts"</code> only: its origin is opaque, and form submission and popups are blocked.</p>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script src="/js/iframes.js"></script>
+</body>
+</html>

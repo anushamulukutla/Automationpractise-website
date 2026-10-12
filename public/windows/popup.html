@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Popup Window - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="window-body">
+  <h1 data-testid="popup-title">Popup Window</h1>
+  <p>Window size: <strong data-testid="popup-size"></strong></p>
+  <button type="button" class="btn" data-testid="popup-close-btn" onclick="window.close()">Close popup</button>
+  <script>
+    document.querySelector('[data-testid="popup-size"]').textContent = window.innerWidth + ' x ' + window.innerHeight;
+  </script>
+</body>
+</html>

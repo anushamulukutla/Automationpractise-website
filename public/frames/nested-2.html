@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nested frame level 2</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="frame-body">
+  <h2 data-testid="nested-l2-title">Level 2 frame</h2>
+  <div class="row">
+    <button type="button" class="btn" data-testid="nested-l2-btn">Click level 2</button>
+    <span class="result" role="status" data-testid="nested-l2-result"></span>
+  </div>
+  <iframe style="height:110px;margin-top:8px" src="/frames/nested-3.html" title="Nested iframe level 3" data-testid="nested-iframe-l3"></iframe>
+  <script>
+    document.querySelector('[data-testid="nested-l2-btn"]').addEventListener('click', function () {
+      document.querySelector('[data-testid="nested-l2-result"]').textContent = 'Level 2 button clicked';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sandboxed frame</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="frame-body">
+  <h2 data-testid="sandbox-title">Sandboxed frame</h2>
+  <p>Origin seen by this frame: <code data-testid="sandbox-origin"></code></p>
+  <div class="row">
+    <button type="button" class="btn" data-testid="sandbox-btn">Run script</button>
+    <span class="result" role="status" data-testid="sandbox-result"></span>
+  </div>
+  <form data-testid="sandbox-form" action="/health" method="get" style="margin-top:8px">
+    <button type="submit" class="btn secondary" data-testid="sandbox-submit-btn">Submit form (blocked)</button>
+  </form>
+  <script>
+    document.querySelector('[data-testid="sandbox-origin"]').textContent = window.origin; // security origin: "null" in a sandbox (location.origin would still show the URL's origin)
+    document.querySelector('[data-testid="sandbox-btn"]').addEventListener('click', function () {
+      document.querySelector('[data-testid="sandbox-result"]').textContent = 'Script ran inside the sandboxed frame';
+    });
+  </script>
+</body>
+</html>

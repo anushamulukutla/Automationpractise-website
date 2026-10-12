@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="home">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">QA Practice App</h1>
+    <p class="lead">A local playground for UI and API test automation. Every interactive element has a stable <code>data-testid</code>; pages marked <span class="badge tricky">tricky</span> add dynamic IDs and delays.</p>
+
+    <section class="card" aria-labelledby="h-pages">
+      <h2 id="h-pages">Practice pages</h2>
+      <ul data-testid="home-page-list">
+        <li><a href="/alerts.html" data-testid="home-link-alerts">Alerts and Dialogs</a>: JS dialogs, modal, toasts, cookie banner</li>
+        <li><a href="/iframes.html" data-testid="home-link-iframes">Iframes</a>: single, nested, dynamic, dynamic ID, sandboxed</li>
+        <li><a href="/windows.html" data-testid="home-link-windows">Windows and Tabs</a>: new tab, popup, multiple tabs, child-to-parent data, redirects</li>
+        <li><a href="/dropdowns.html" data-testid="home-link-dropdowns">Dropdowns and Selects</a>: native, custom, dependent, autocomplete, delayed</li>
+        <li><a href="/dynamic.html" data-testid="home-link-dynamic">Dynamic Elements</a>: random ids, delays, spinners, infinite scroll, stale elements</li>
+        <li><a href="/files.html" data-testid="home-link-files">File Upload and Download</a>: single, multiple, drag and drop, progress, validation, downloads</li>
+        <li><a href="/forms.html" data-testid="home-link-forms">Forms and Validation</a>: registration form, inline validation, wizard</li>
+        <li><a href="/tables.html" data-testid="home-link-tables">Tables and Pagination</a>: sort, filter, page, select, expand, edit</li>
+        <li><a href="/mouse.html" data-testid="home-link-mouse">Mouse and Keyboard</a>: hover, right-click, drag and drop, shortcuts</li>
+        <li><a href="/auth.html" data-testid="home-link-auth">Auth and Sessions</a>: login states, JWT, timeout, protected page, storage viewer</li>
+        <li><a href="/advanced.html" data-testid="home-link-advanced">Advanced</a>: shadow DOM, canvas, SVG, permissions, basic auth, console errors</li>
+        <li><a href="/rest-api.html" data-testid="home-link-rest-api">REST API</a>: CRUD, JWT, pagination, /slow, /flaky, <a href="/docs" data-testid="home-link-docs">Swagger docs</a></li>
+      </ul>
+    </section>
+
+    <section class="card" aria-labelledby="h-tools">
+      <h2 id="h-tools">Tools</h2>
+      <ul>
+        <li><a href="/testdata.html" data-testid="home-link-testdata">Test Data</a>: generate, export and import data; sample upload files</li>
+        <li><a href="/settings.html" data-testid="home-link-settings">Settings</a>: slow network, flaky mode, randomize IDs, reset</li>
+        <li><a href="/health" data-testid="home-link-health">/health</a>: service health endpoint</li>
+      </ul>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+</body>
+</html>

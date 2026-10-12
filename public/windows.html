@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Windows and Tabs - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="windows">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Windows and Tabs</h1>
+    <p class="lead">New tabs, popup windows, several tabs at once, data passed from a child window, and redirects.</p>
+
+    <section class="card" aria-labelledby="h-newtab" data-testid="section-new-tab">
+      <h2 id="h-newtab">New tab and same tab</h2>
+      <div class="demo">
+        <a href="/windows/new-tab.html" target="_blank" rel="noopener noreferrer" data-testid="new-tab-link">Open a new tab (target=_blank)</a>
+      </div>
+      <div class="demo">
+        <a href="/windows/same-tab.html" data-testid="same-tab-link">Open in the same tab</a>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-popup" data-testid="section-popup">
+      <h2 id="h-popup">Popup window</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="open-popup-btn">Open popup (500 x 400)</button>
+        <span class="result" role="status" data-testid="popup-status">No popup opened yet</span>
+      </div>
+      <p class="hint">Uses <code>window.open</code> with a width and height.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-multi" data-testid="section-multiple-tabs">
+      <h2 id="h-multi">Multiple tabs at once</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="open-multiple-tabs-btn">Open 3 tabs</button>
+        <span class="result" role="status" data-testid="multi-tabs-status">No tabs opened yet</span>
+      </div>
+      <p class="hint">Opens tabs 1, 2 and 3 from a single click. A regular browser may block all but the first; automation browsers normally allow them.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-child" data-testid="section-child-window">
+      <h2 id="h-child">Child window passes data back</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="open-child-btn">Open child window</button>
+        <span>Received from child: <strong class="result" role="status" data-testid="child-result">nothing yet</strong></span>
+      </div>
+      <p class="hint">Type a message in the child window and send it; the child posts it back with <code>postMessage</code>.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-redirect" data-testid="section-redirect">
+      <h2 id="h-redirect">Redirect chain</h2>
+      <a href="/redirect/1" data-testid="redirect-chain-link">Start redirect chain (3 server redirects)</a>
+      <p class="hint">/redirect/1 &rarr; /redirect/2 &rarr; /redirect/3 &rarr; landing page, all in the same tab.</p>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script src="/js/windows.js"></script>
+</body>
+</html>

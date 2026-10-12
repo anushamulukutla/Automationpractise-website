@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Child Window - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="window-body">
+  <h1 data-testid="child-title">Child Window</h1>
+  <div class="field">
+    <label for="child-message">Message for the parent</label>
+    <input type="text" id="child-message" autocomplete="off" data-testid="child-message-input">
+  </div>
+  <div class="row">
+    <button type="button" class="btn" data-testid="child-send-btn">Send to parent</button>
+    <button type="button" class="btn secondary" data-testid="child-close-btn">Close window</button>
+  </div>
+  <p class="result" role="status" data-testid="child-status"></p>
+  <script>
+    var q = function (id) { return document.querySelector('[data-testid="' + id + '"]'); };
+    q('child-send-btn').addEventListener('click', function () {
+      var status = q('child-status');
+      if (!window.opener || window.opener.closed) {
+        status.textContent = 'No parent window available';
+        status.className = 'result err';
+        return;
+      }
+      window.opener.postMessage({ type: 'child-data', value: q('child-message-input').value }, location.origin);
+      status.textContent = 'Message sent to parent';
+      status.className = 'result ok';
+    });
+    q('child-close-btn').addEventListener('click', function () { window.close(); });
+  </script>
+</body>
+</html>

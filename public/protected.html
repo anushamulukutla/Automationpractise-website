@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protected Page - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+<script src="/js/session.js"></script>
+<script>
+  // Guard runs before the page renders: no valid session means go to the login page.
+  (function () {
+    if (!qa.session.get()) {
+      location.replace('/auth.html?reason=login_required&redirect=' + encodeURIComponent('/protected.html'));
+    }
+  })();
+</script>
+</head>
+<body data-page="auth">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Protected Page</h1>
+    <section class="card" data-testid="protected-content">
+      <p class="result ok" role="status" data-testid="protected-welcome"></p>
+      <dl class="summary">
+        <dt>Role</dt><dd data-testid="protected-role"></dd>
+        <dt>Session</dt><dd data-testid="protected-countdown"></dd>
+      </dl>
+      <p data-testid="protected-secret">Secret content: only logged-in users can see this.</p>
+      <div class="row">
+        <a href="/auth.html" data-testid="protected-back-link">Back to Auth and Sessions</a>
+        <button type="button" class="btn secondary" data-testid="protected-logout-btn">Log out</button>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script>
+  (function () {
+    var s = qa.session.get();
+    if (!s) return;
+    var t = qa.testid;
+    t('protected-welcome').textContent = 'Welcome, ' + s.user.username + '!';
+    t('protected-role').textContent = s.user.role;
+    function tick() {
+      var left = Math.ceil((s.expiresAt - Date.now()) / 1000);
+      if (left <= 0) {
+        qa.session.clear();
+        location.replace('/auth.html?reason=session_expired');
+        return;
+      }
+      t('protected-countdown').textContent = 'Expires in ' + left + ' s';
+    }
+    tick();
+    setInterval(tick, 1000);
+    t('protected-logout-btn').addEventListener('click', function () {
+      qa.session.clear();
+      location.href = '/auth.html';
+    });
+  })();
+</script>
+</body>
+</html>

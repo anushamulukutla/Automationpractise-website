@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tab</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="window-body">
+  <h1 data-testid="tab-title">Tab <span data-testid="tab-number"></span></h1>
+  <p data-testid="tab-text"></p>
+  <script>
+    var n = new URLSearchParams(location.search).get('n') || '?';
+    document.title = 'Tab ' + n;
+    document.querySelector('[data-testid="tab-number"]').textContent = n;
+    document.querySelector('[data-testid="tab-text"]').textContent = 'This is tab number ' + n + ' of the multiple-tabs demo.';
+  </script>
+</body>
+</html>

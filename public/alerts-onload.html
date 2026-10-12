@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alert on Page Load - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="alerts">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Alert on Page Load</h1>
+    <p class="lead">This page shows a JavaScript alert as soon as it loads.</p>
+    <section class="card">
+      <p><span class="result" role="status" data-testid="onload-alert-result">Waiting for the alert...</span></p>
+      <p><a href="/alerts.html" data-testid="onload-back-link">Back to Alerts and Dialogs</a></p>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script>
+  alert('This alert appeared when the page loaded.');
+  var el = qa.testid('onload-alert-result');
+  el.textContent = 'Page-load alert was dismissed';
+  el.className = 'result ok';
+</script>
+</body>
+</html>

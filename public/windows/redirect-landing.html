@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redirect Landing - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="window-body">
+  <h1 data-testid="redirect-landing-title">Redirect Landing</h1>
+  <p data-testid="redirect-landing-text"></p>
+  <a href="/windows.html" data-testid="redirect-back-link">Back to Windows and Tabs</a>
+  <script>
+    var hops = new URLSearchParams(location.search).get('hops') || '0';
+    document.querySelector('[data-testid="redirect-landing-text"]').textContent =
+      'You arrived after ' + hops + ' server redirects.';
+  </script>
+</body>
+</html>

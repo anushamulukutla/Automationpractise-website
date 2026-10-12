@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advanced - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="advanced">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Advanced</h1>
+    <p class="lead">Shadow DOM, canvas, SVG, a broken link and image checker, browser permission prompts, HTTP basic auth and a page with console errors.</p>
+
+    <section class="card" aria-labelledby="h-shadow" data-testid="section-shadow">
+      <h2 id="h-shadow">Shadow DOM</h2>
+      <div class="grid-2">
+        <div>
+          <h3>Open shadow root</h3>
+          <qa-shadow-card data-testid="shadow-host"></qa-shadow-card>
+          <p class="hint">Playwright and Cypress (with <code>includeShadowDom</code>) pierce open roots automatically; Selenium needs <code>shadowRoot</code>.</p>
+        </div>
+        <div>
+          <h3>Closed shadow root <span class="badge tricky">tricky</span></h3>
+          <qa-closed-card data-testid="closed-shadow-host"></qa-closed-card>
+          <p class="result" role="status" data-testid="closed-shadow-status">Not clicked</p>
+          <p class="hint">Its contents cannot be reached from scripts. Test it by keyboard focus and the visible outside effect.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-canvas" data-testid="section-canvas">
+      <h2 id="h-canvas">Canvas</h2>
+      <canvas id="draw-canvas" width="420" height="180" class="canvas" role="img" aria-label="Drawing canvas: draw with the mouse" data-testid="drawing-canvas"></canvas>
+      <div class="row" style="margin-top:8px">
+        <button type="button" class="btn secondary" data-testid="canvas-clear-btn">Clear</button>
+        <span>Strokes: <strong data-testid="canvas-strokes">0</strong></span>
+        <span>Last position: <code data-testid="canvas-position">-</code></span>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-svg" data-testid="section-svg">
+      <h2 id="h-svg">SVG elements</h2>
+      <svg width="360" height="120" viewBox="0 0 360 120" role="group" aria-label="Clickable shapes" data-testid="svg-root">
+        <circle cx="60" cy="60" r="40" fill="#2447c9" tabindex="0" role="button" aria-label="Circle" data-testid="svg-circle"></circle>
+        <rect x="130" y="20" width="80" height="80" rx="8" fill="#146c43" tabindex="0" role="button" aria-label="Square" data-testid="svg-rect"></rect>
+        <path d="M300 20 L340 100 L260 100 Z" fill="#9a5b00" tabindex="0" role="button" aria-label="Triangle" data-testid="svg-triangle"></path>
+        <text x="180" y="116" text-anchor="middle" font-size="12" fill="#566074" data-testid="svg-label">Click a shape</text>
+      </svg>
+      <p class="result" role="status" data-testid="svg-status">No shape clicked</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-check" data-testid="section-checker">
+      <h2 id="h-check">Broken links and images checker</h2>
+      <ul data-testid="check-links">
+        <li><a href="/health" data-testid="check-link-ok">Health endpoint (200)</a></li>
+        <li><a href="/does-not-exist" data-testid="check-link-404">Missing page (404)</a></li>
+        <li><a href="/status/500" data-testid="check-link-500">Server error (500)</a></li>
+      </ul>
+      <div class="row" data-testid="check-images">
+        <img src="/img/ok.svg" alt="Valid image" width="60" height="60" data-testid="check-image-ok">
+        <img src="/img/missing-image.png" alt="Broken image" width="60" height="60" data-testid="check-image-broken">
+      </div>
+      <div class="row" style="margin-top:10px">
+        <button type="button" class="btn" data-testid="checker-run-btn">Check links and images</button>
+        <span class="result" role="status" data-testid="checker-summary">Not run yet</span>
+      </div>
+      <table style="margin-top:10px" aria-label="Checker results"><thead><tr><th scope="col">Target</th><th scope="col">Result</th></tr></thead><tbody data-testid="checker-results"></tbody></table>
+    </section>
+
+    <section class="card" aria-labelledby="h-perm" data-testid="section-permissions">
+      <h2 id="h-perm">Geolocation and notification prompts</h2>
+      <div class="demo">
+        <div class="row">
+          <button type="button" class="btn" data-testid="geo-request-btn">Get my location</button>
+          <span>Permission: <strong data-testid="geo-permission">unknown</strong></span>
+        </div>
+        <p class="result" role="status" data-testid="geo-result">No location requested</p>
+      </div>
+      <div class="demo">
+        <div class="row">
+          <button type="button" class="btn" data-testid="notif-request-btn">Request notification permission</button>
+          <button type="button" class="btn secondary" data-testid="notif-show-btn">Show a notification</button>
+          <span>Permission: <strong data-testid="notif-permission">unknown</strong></span>
+        </div>
+        <p class="result" role="status" data-testid="notif-result">No notification shown</p>
+      </div>
+      <p class="hint">In Playwright use <code>context.grant_permissions([...])</code> and <code>context.set_geolocation(...)</code>.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-misc" data-testid="section-misc">
+      <h2 id="h-misc">HTTP basic auth and console errors</h2>
+      <ul>
+        <li><a href="/basic-auth" data-testid="basic-auth-link">HTTP basic auth page</a> (username <code>admin</code>, password <code>admin</code>)</li>
+        <li><a href="/console-error.html" data-testid="console-error-link">Page that logs console errors</a></li>
+      </ul>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script src="/js/advanced.js"></script>
+</body>
+</html>

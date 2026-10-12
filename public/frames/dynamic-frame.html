@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dynamic frame</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="frame-body">
+  <h2 data-testid="dynamic-frame-title">Dynamic content frame</h2>
+  <p class="result" role="status" data-testid="dynamic-frame-status">Loading...</p>
+  <p data-testid="dynamic-frame-content" hidden></p>
+  <script>
+    var statusEl = document.querySelector('[data-testid="dynamic-frame-status"]');
+    var content = document.querySelector('[data-testid="dynamic-frame-content"]');
+    function show(text) {
+      content.textContent = text;
+      content.hidden = !text;
+    }
+    // Content only appears 2 seconds after the frame loads.
+    setTimeout(function () {
+      statusEl.textContent = 'Loaded';
+      statusEl.className = 'result ok';
+      show('Initial content loaded at ' + new Date().toLocaleTimeString());
+    }, 2000);
+    // The parent page can replace the content with postMessage.
+    window.addEventListener('message', function (e) {
+      if (e.origin !== location.origin || !e.data || e.data.type !== 'set-content') return;
+      statusEl.textContent = e.data.text ? 'Updated by parent' : 'Cleared by parent';
+      statusEl.className = 'result ok';
+      show(e.data.text);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "qa-practice-app",
+  "version": "0.1.0",
+  "description": "Local web app for practicing and demoing UI and API test automation (Playwright, Selenium, Cypress, Postman).",
+  "main": "server.js",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node scripts/seed.js",
+    "docs:testids": "node scripts/gen-testids.js"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.6.0",
+    "archiver": "^8.0.0",
+    "express": "^5.3.0",
+    "multer": "^2.4.0",
+    "swagger-ui-dist": "^5.33.1"
+  }
+}

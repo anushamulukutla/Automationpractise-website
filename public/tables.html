@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tables and Pagination - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="tables">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Tables and Pagination</h1>
+    <p class="lead">A 120-row table you can sort, filter, page, select, expand and edit in place.</p>
+
+    <section class="card" aria-labelledby="h-table" data-testid="section-table">
+      <h2 id="h-table">Employees</h2>
+      <div class="row" style="margin-bottom:12px">
+        <div>
+          <label for="table-filter">Filter (name, email or notes)</label>
+          <input type="text" id="table-filter" autocomplete="off" placeholder="e.g. smith" data-testid="table-filter-input">
+        </div>
+        <div>
+          <label for="dept-filter">Department</label>
+          <select id="dept-filter" data-testid="table-dept-filter">
+            <option value="">All</option>
+            <option>Engineering</option><option>Sales</option><option>Support</option><option>Marketing</option><option>Finance</option>
+          </select>
+        </div>
+        <div>
+          <label for="page-size">Rows per page</label>
+          <select id="page-size" data-testid="page-size-select">
+            <option value="10">10</option><option value="25">25</option><option value="50">50</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom:8px">
+        <span class="result" role="status" data-testid="selected-count">0 selected</span>
+        <button type="button" class="btn secondary" data-testid="clear-selection-btn">Clear selection</button>
+        <span class="result" role="status" data-testid="edit-status"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table data-testid="data-table" aria-label="Employees">
+          <thead>
+            <tr>
+              <th scope="col"><input type="checkbox" aria-label="Select all rows on this page" data-testid="select-all-checkbox"></th>
+              <th scope="col" aria-sort="none" data-col="id"><button type="button" class="sort-btn" data-testid="sort-id-btn">ID</button></th>
+              <th scope="col" aria-sort="none" data-col="name"><button type="button" class="sort-btn" data-testid="sort-name-btn">Name</button></th>
+              <th scope="col" aria-sort="none" data-col="department"><button type="button" class="sort-btn" data-testid="sort-department-btn">Department</button></th>
+              <th scope="col" aria-sort="none" data-col="status"><button type="button" class="sort-btn" data-testid="sort-status-btn">Status</button></th>
+              <th scope="col" aria-sort="none" data-col="salary"><button type="button" class="sort-btn" data-testid="sort-salary-btn">Salary</button></th>
+              <th scope="col"><span class="visually-hidden">Details</span></th>
+            </tr>
+          </thead>
+          <tbody data-testid="table-body"></tbody>
+        </table>
+      </div>
+      <p class="hint" data-testid="table-empty" hidden>No rows match your filter.</p>
+      <p class="hint">Double-click a name or salary cell to edit it. Enter saves, Escape cancels.</p>
+
+      <nav class="row" style="margin-top:10px" aria-label="Table pagination">
+        <button type="button" class="btn secondary" data-testid="page-first-btn">First</button>
+        <button type="button" class="btn secondary" data-testid="page-prev-btn">Previous</button>
+        <span data-testid="page-buttons" class="row"></span>
+        <button type="button" class="btn secondary" data-testid="page-next-btn">Next</button>
+        <button type="button" class="btn secondary" data-testid="page-last-btn">Last</button>
+        <span class="result" role="status" data-testid="page-info"></span>
+      </nav>
+    </section>
+  </main>
+</div>
+<script src="/js/layout.js"></script>
+<script src="/js/tables.js"></script>
+</body>
+</html>

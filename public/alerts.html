@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alerts and Dialogs - QA Practice App</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="alerts">
+<a class="skip-link" href="#main" data-testid="skip-to-content-link">Skip to content</a>
+<div class="app">
+  <aside id="sidebar-root"></aside>
+  <main id="main" tabindex="-1">
+    <h1 data-testid="page-title">Alerts and Dialogs</h1>
+    <p class="lead">Native JavaScript dialogs, an in-page modal, auto-dismissing toasts and a cookie banner.</p>
+
+    <section class="card" aria-labelledby="h-native" data-testid="section-native-dialogs">
+      <h2 id="h-native">Native JavaScript dialogs</h2>
+
+      <div class="demo">
+        <div class="row">
+          <button type="button" class="btn" data-testid="js-alert-btn">Show alert</button>
+          <span class="result" role="status" data-testid="alert-result">No alert shown yet</span>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="row">
+          <button type="button" class="btn" data-testid="js-confirm-btn">Show confirm</button>
+          <span class="result" role="status" data-testid="confirm-result">No confirm shown yet</span>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="row">
+          <button type="button" class="btn" data-testid="js-prompt-btn">Show prompt</button>
+          <span class="result" role="status" data-testid="prompt-result">No prompt shown yet</span>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="row">
+          <button type="button" class="btn" data-testid="delayed-alert-btn">Alert in 5 seconds</button>
+          <span class="badge tricky">tricky</span>
+          <span class="result" role="status" data-testid="delayed-alert-status">Not started</span>
+        </div>
+        <p class="hint">The alert fires 5 seconds after the click, so register your dialog handler before clicking.</p>
+      </div>
+
+      <div class="demo">
+        <a href="/alerts-onload.html" data-testid="onload-alert-link">Open the page that shows an alert on load</a>
+        <p class="hint">An alert fires while that page loads, so register your dialog handler before navigating.</p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-modal" data-testid="section-modal">
+      <h2 id="h-modal">In-page modal</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="open-modal-btn">Open modal</button>
+        <span class="result" role="status" data-testid="modal-result">Modal not used yet</span>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-toast" data-testid="section-toasts">
+      <h2 id="h-toast">Toast notifications</h2>
+      <div class="row">
+        <button type="button" class="btn" data-testid="toast-success-btn">Success toast</button>
+        <button type="button" class="btn" data-testid="toast-error-btn">Error toast</button>
+        <button type="button" class="btn" data-testid="toast-info-btn">Info toast</button>
+      </div>
+      <p class="hint">Toasts dismiss themselves after 3 seconds, or earlier with their close button.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-cookie" data-testid="section-cookie">
+      <h2 id="h-cookie">Cookie consent banner</h2>
+      <div class="row">
+        <span>Consent: <strong class="result" role="status" data-testid="cookie-status">not set</strong></span>
+        <button type="button" class="btn secondary" data-testid="cookie-reset-btn">Reset consent</button>
+      </div>
+      <p class="hint">The banner appears about 1 second after load until you choose.</p>
+    </section>
+  </main>
+</div>
+
+<div class="modal-backdrop" data-testid="modal-backdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" data-testid="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modal-title" data-testid="modal-title">Confirm your choice</h2>
+      <button type="button" class="icon-btn" aria-label="Close" data-testid="modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body" data-testid="modal-body">Do you want to continue with this action?</div>
+    <div class="modal-footer">
+      <button type="button" class="btn secondary" data-testid="modal-cancel-btn">Cancel</button>
+      <button type="button" class="btn" data-testid="modal-confirm-btn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" aria-live="polite" data-testid="toast-container"></div>
+
+<div class="cookie-banner" role="dialog" aria-label="Cookie consent" data-testid="cookie-banner" hidden>
+  <p data-testid="cookie-banner-text">We use cookies to improve this practice site. Accept or reject?</p>
+  <div class="row">
+    <button type="button" class="btn secondary" data-testid="cookie-reject-btn">Reject</button>
+    <button type="button" class="btn" data-testid="cookie-accept-btn">Accept</button>
+  </div>
+</div>
+
+<script src="/js/layout.js"></script>
+<script src="/js/alerts.js"></script>
+</body>
+</html>
