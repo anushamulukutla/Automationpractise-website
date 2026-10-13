@@ -1,3 +1,4 @@
+
 # QA Automation Practice App
 
 A local web app for practicing and demoing UI and API test automation. It works with Playwright, Selenium and Cypress: every interactive element has a stable `data-testid`, and pages marked **tricky** add dynamic IDs and delays so you can practice resilient locators.
@@ -1003,3 +1004,7 @@ Generated from the source by `npm run docs:testids`; do not edit between the mar
 ## Roadmap
 
 Phase 1 (pages 1 to 4, Test Data, Settings, Docker) and phase 2 (pages 5 to 12, REST API with Swagger, remaining tests) are both done.
+=======
+# Automationpractise-website
+Python-based Playwright test automation project for web application end-to-end testing.
+
