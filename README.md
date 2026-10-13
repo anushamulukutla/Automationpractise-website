@@ -634,13 +634,24 @@ Generated from the source by `npm run docs:testids`; do not edit between the mar
 | `summary-name` | dd (created by script) |
 | `summary-country` | dd (created by script) |
 
+### Form frame (`/frame-form.html`)
+
+| data-testid | Element |
+| --- | --- |
+| `frame-form-title` | h2 |
+| `frame-form` | form |
+| `frame-name-input` | input[text] |
+| `frame-email-input` | input[email] |
+| `frame-submit-btn` | button |
+| `frame-form-result` | span (role=status) |
+
 ### Iframes (`/iframes.html`)
 
 | data-testid | Element |
 | --- | --- |
 | `page-title` | h1 |
 | `section-single-iframe` | section |
-| `single-iframe` | iframe |
+| `form-iframe` | iframe |
 | `section-nested-iframes` | section |
 | `nested-iframe-l1` | iframe |
 | `section-dynamic-iframe` | section |
@@ -891,17 +902,6 @@ Generated from the source by `npm run docs:testids`; do not edit between the mar
 | `dynamic-frame-title` | h2 |
 | `dynamic-frame-status` | p (role=status) |
 | `dynamic-frame-content` | p |
-
-### Form frame (`/frames/form-frame.html`)
-
-| data-testid | Element |
-| --- | --- |
-| `frame-form-title` | h2 |
-| `frame-form` | form |
-| `frame-name-input` | input[text] |
-| `frame-email-input` | input[email] |
-| `frame-submit-btn` | button |
-| `frame-form-result` | span (role=status) |
 
 ### Nested frame level 1 (`/frames/nested-1.html`)
 

@@ -11,7 +11,7 @@ class IframesPage(BasePage):
 
     @property
     def single_frame(self) -> FrameLocator:
-        return self.frame("single-iframe")
+        return self.frame("form-iframe")
 
     def fill_and_submit_single_form(self, name: str, email: str):
         form = self.single_frame

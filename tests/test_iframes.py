@@ -4,6 +4,17 @@ from playwright.sync_api import Page, expect
 from pages.iframes_page import IframesPage
 
 
+def test_form_is_loaded_in_the_named_iframe(page: Page):
+    iframes = IframesPage(page).open()
+    iframe = iframes.tid("form-iframe")
+
+    expect(iframe).to_have_attribute("name", "formFrame")
+    expect(iframe).to_have_attribute("id", "form-frame")
+    expect(iframe).to_have_attribute("src", "frame-form.html")
+    expect(iframe).to_have_attribute("title", "Contact form")
+    expect(iframes.single_frame.get_by_test_id("frame-form")).to_have_attribute("novalidate", "")
+
+
 def test_fill_form_inside_single_iframe(page: Page):
     iframes = IframesPage(page).open()
     iframes.fill_and_submit_single_form("Anu", "anu@example.com")
